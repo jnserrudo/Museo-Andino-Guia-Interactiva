@@ -1,0 +1,721 @@
+:root {
+    /* --primary: #456bff; */
+    --primary: #3e4b51;
+  }
+  
+  .header {
+    background-color: var(--primary) !important  ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .footer {
+    background-color: var(--primary) !important  ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    color: white;
+  }
+  .titulo {
+    font-family: initial !important;
+    font-size: xx-large !important;
+    color: white;
+  }
+  .titulo_administracion {
+    font-size: xx-large !important;
+    text-align: center;
+    color: black;
+  }
+  
+  .txt {
+    font-family: Arial, Helvetica, sans-serif !important;
+  
+    font-size: large !important;
+    color: white;
+  }
+  .section {
+    padding-left: 1rem;
+    display: flex;
+    padding: 1rem;
+  }
+  .txt_section {
+    color: grey;
+    margin: 1rem;
+  }
+  
+  .logo_hospital {
+    display: block;
+    margin-left: 8rem;
+    width: 110px;
+    height: 110px;
+  }
+  
+  .logo_hospital_footer {
+    display: block;
+    margin-left: 5rem;
+    width: 55px;
+    height: 55px;
+  }
+  
+  .cont_btn_login {
+    display: flex;
+  
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .main_home {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Asegura el centrado vertical del contenedor */
+    min-height: calc(
+      100vh - 100px
+    ); /* Ajusta 100px según el espacio aproximado que ocupan el header y el footer */
+  }
+  
+  .img_fondo {
+    display: block;
+    width: 100%;
+    height: 100%; /* Ajusta la altura de la imagen de fondo para que ocupe toda la altura del contenedor */
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .cont_login {
+    width: 380px;
+    height: 350px;
+    background-color: var(--primary);
+    position: absolute;
+    z-index: 100;
+    border-radius: 20px;
+    left: 50%;
+    top: 50%; /* Centra verticalmente el contenedor */
+    transform: translate(-50%, -50%); /* Ajusta la posición del contenedor */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  
+  .input_login {
+    background-color: white;
+    color: black !important;
+    border-radius: 5px !important;
+    margin: 1rem !important;
+  }
+  
+  .btn_login {
+    border: white;
+    margin-right: 2rem;
+  }
+  
+  .list_card {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .card {
+    width: 200px;
+    height: 190px;
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+  }
+  .tablist {
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--primary);
+  }
+  
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .cont_usuario {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    margin-right: 2rem;
+    flex-wrap: wrap;
+  }
+  .nav_recetas {
+    display: flex;
+    margin-left: 2rem;
+    font-size: large;
+  }
+  
+  .cont_recetas {
+    border: 0.5px grey solid;
+    border-radius: 5px;
+    margin: 2rem 4rem 0;
+    padding: 2rem;
+    overflow: auto;
+  }
+  
+  .txt_tab {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  
+  /* .select_recetas {
+    padding: 1rem;
+  } */
+  
+  .cont_sel_recetas {
+    display: flex;
+    /*   border: 2px red solid;
+   */
+    flex-direction: column;
+    width: 80%;
+    font-weight: 700;
+  }
+  
+  .select_recetas {
+    border: 1px black solid !important;
+    border-radius: 5px !important;
+  }
+  .select_patologias {
+    width: 300px !important;
+  }
+  .select_recetas * {
+    color: gray !important;
+    font-weight: 400 !important;
+    border: 1px white solid !important;
+  }
+  
+  /* esta clase, no la cree yo, tuve que fijarme en la clase que 
+  usa antd en su select mediante el inspector de elementos para poder identificar al elemento y darle el
+   color que queria */
+  .ant-select-selection-item {
+    border-radius: 50px !important ;
+    /* border: 2px var(--primary) solid !important;
+    background-color: cornflowerblue !important; */
+  }
+  
+  .cont_videos {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* ------------------------PARA EL LISTADO DE RECETAS------------------------ */
+  .list-item-receta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #e0f2f1;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .list-item-receta:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+  
+  .receta-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .receta-patologias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espacio entre los Tags */
+    margin-top: 8px; /* Espacio superior para separar del nombre de la receta */
+  }
+  
+  .patologias-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 4px; /* Espacio entre el encabezado y los Tags */
+    color: #046ba3; /* Color para que combine con los Tags */
+  }
+  
+  @media (max-width: 620px) {
+    .logo_hospital {
+      margin-left: 0;
+    }
+  
+    .cont_videos {
+      justify-content: center;
+      border: 0;
+    }
+    .cont_usuario {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-right: 2rem;
+      flex-wrap: wrap;
+    }
+  }
+  
+  .cont_video {
+    margin: 1rem !important;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 250px;
+    height: 150px;
+  }
+  
+  .tabla {
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-radius: 5px;
+    overflow: scroll;
+    margin: 0.5rem auto 0;
+  }
+  
+  
+  .header_vent_emergente {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+    position: sticky; /* Cambiado a 'sticky' para mantener la barra fija dentro de su contenedor */
+    top: 0; /* Esto asegura que la barra permanezca en la parte superior del contenedor */
+    z-index: 999; /* Asegura que esté por encima del contenido de la ventana emergente */
+    background-color: var(--primary);
+    padding: 10px; /* Añadir algo de padding para que se vea más estético */
+  }
+  
+  .form {
+    margin-top: 1.5rem;
+  }
+  .form_admin{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .buscador{
+    width: 90% !important;
+  
+  }
+  .cont_btn_agregar {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+  
+  .btn_agregar {
+    margin:0 auto;
+  }
+  
+  .input_edit {
+    border: 1px black solid;
+    margin: 1.2rem;
+    width: 250px !important;
+    overflow: auto;
+    /* width: 40% !important; */
+  }
+  
+  .input_edit_large {
+    border: 1px black solid;
+    margin: 1.2rem;
+    width: 100% !important;
+    overflow: auto;
+    /* width: 40% !important; */
+  }
+  
+  .ol {
+    margin: 1.2rem;
+    width: 250px !important;
+    overflow: scroll !important;
+  }
+  
+  .cont_form_input {
+    display: flex;
+    flex-wrap: wrap !important;
+    justify-content: space-around;
+    align-items: center;
+    /*     border: 2px red solid;
+   */
+  }
+  
+  .imgCrop {
+    width: 285px !important;
+    /*     border: 2px red solid !important;
+   */
+    display: flex !important;
+    justify-content: center;
+  }
+  
+  .imgCropSeeReceta {
+  }
+  
+  .uploadSeeReceta img {
+    border: 2px red solid !important;
+    width: 400px;
+    height: 400px;
+  }
+  
+  .cont_input_edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+  }
+  
+  .cont_input_edit_large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95% !important;
+  }
+  
+  /* REEEEEEECEEEEEEETAAAA */
+  
+  .receta_foto_ingredientes {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow: auto;
+  }
+  
+  .img_receta {
+    display: block;
+    border-radius: 10px;
+    width: 350px;
+    height: 250px;
+  }
+  
+  .receta_foto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: var(--primary);
+    margin: 0 0.5rem;
+  }
+  
+  .box_shadow {
+    padding: 0.5rem;
+    border: 0.5px var(--primary) solid;
+  }
+  
+  .receta_ingredientes {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0.5rem;
+  }
+  
+  .receta_valores {
+    display: flex;
+    /*   border: 2px red solid;
+   */
+    max-width: 450px;
+    flex-wrap: wrap;
+  
+    justify-content: space-around;
+  }
+  
+  .receta_valor {
+    display: flex;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 10px;
+    width: 90px;
+    height: 70px;
+    margin: 5px 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ingredientes {
+    margin-top: 2rem;
+  }
+  
+  .receta_preparacion,
+  .receta_tipsSaludables,
+  .receta_composicion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .cont_tips_composicion {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .titulo_receta {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  
+  .btn_accion_edit_patologia,
+  .btn_accion_edit_receta {
+    margin: 5px;
+  }
+  
+  .cont_acciones {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .icon_accion {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+      rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    font-size: x-large;
+  }
+  
+  .cont_btns_confirmacion {
+    display: flex;
+  
+    justify-content: space-around;
+    margin-top: 2rem;
+    width: 50%;
+  }
+  
+  .form_edit_informacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tabs_videos {
+    height: 300px !important;
+    margin: 0 5px;
+    width: 300px;
+    overflow: auto;
+  }
+  
+  .logo_sidebar {
+  }
+  
+  .side_bar {
+  }
+  
+  /* este selector es para el icono del sidebar, ya es interno al componente sidebar, asi que por eso lo llamo de esta manera */
+  .ant-layout-sider-zero-width-trigger {
+    background-color: var(--primary) !important;
+    margin-top: 2.8rem !important;
+    padding: 1.5rem !important;
+  }
+  
+  .cont_opciones_footer {
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+  .titulo_footer {
+    border: 1px #456bff solid;
+    border-radius: 5px;
+    width: 100%;
+    font-size: large !important;
+    text-align: center;
+  }
+  
+  .icon_imagen {
+    display: block;
+    width: 75px;
+    height: 75px;
+  }
+  .receta_nombre {
+    display: flex;
+    font-size: large;
+  }
+  
+  .titulo_see {
+    font-size: x-large;
+  }
+  
+  .txt_nombre_receta {
+    /*   border: 2px red solid;
+   */
+    margin-left: 1rem;
+  }
+  
+  .tab_video_iframe {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tabpanel_descripcion {
+    overflow: scroll !important;
+    height: 250px !important;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Nuevo estilo para el contenedor del contenido */
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(
+      100vh - 200px
+    ); /* Ajusta la altura mínima para que el pie de página quede siempre abajo */
+  }
+  
+  /* Estilo para el div que contiene el contenido principal y el footer */
+  .content-main {
+    flex: 1; /* Permite que este contenedor ocupe el espacio restante */
+  }
+  
+  /* Añadir este  */
+  
+  .cont_tablas_info {
+    padding: 1rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  @media screen and (max-width: 600px) {
+    th,
+    td {
+      white-space: nowrap; /* Asegura que el contenido no se quiebre en líneas múltiples */
+    }
+  }
+  
+  .cont_btns_pacientes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 40%;
+    margin: 0 auto;
+  }
+  
+  .cont_habilitamiento {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  
+    justify-content: space-evenly;
+    /*  width: 80%;
+    height: 40%; */
+    margin: 0 auto;
+  }
+  
+  
+  
+  
+  
+  /* -------------------------------------------------------- */
+  
+  .grid_chackra{
+    color: #046ba3;
+  }
+  
+  .form {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input_floating {
+    background: none;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .input_floating:focus {
+    outline: none;
+    border-bottom: 2px solid #046ba3;
+  }
+  
+  .label_floating {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    font-size: 1rem;
+    color: #aaa;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+  }
+  
+  .input_floating:focus + .label_floating,
+  .input_floating:not(:placeholder-shown) + .label_floating,
+  textarea.input_floating:focus + .label_floating,
+  textarea.input_floating:not(:placeholder-shown) + .label_floating {
+    top: -0.75rem;
+    font-size: 0.85rem;
+    color: #046ba3;
+  }
+  
+  textarea.input_floating {
+    height: 100px;
+    resize: none;
+  }
+  
+  .action_buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+  }
+  
+  
+  
+  .cont_btns_acciones{
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  
