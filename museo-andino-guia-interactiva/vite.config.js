@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "/museo",
   build: {
     outDir: "../museo-andino-guia-interactiva/dist",
     rollupOptions: {
