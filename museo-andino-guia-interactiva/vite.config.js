@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/museo",
+  base: "/museo/",
   build: {
-    outDir: "../museo-andino-guia-interactiva/dist",
+    outDir: "dist",
     rollupOptions: {
       output: {
         assetFileNames: "assets/[name]-[hash][extname]",
