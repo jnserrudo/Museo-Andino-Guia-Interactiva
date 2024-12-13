@@ -131,7 +131,7 @@ export const MainApp = () => {
           <Content style={{ margin: "16px" }}>
           {selectedKey === "1" && (
                 <main className="main_home">
-                  <img src="/fondo.jpg" className="img_fondo" alt="" />
+                  <img src="fondo.jpg" className="img_fondo" alt="" />
 
                   <ListCard
                     setTabIndex={(index) => setSelectedKey(index.toString())}
