@@ -31,20 +31,18 @@ function getItem(label, key, icon, children) {
 // Definición del menú del sidebar
 const items = [
   getItem("Inicio", "1", <PieChartOutlined />),
-  getItem("Recetas", "2", <DesktopOutlined />),
-  getItem("Informarse", "3", <UserOutlined />),
-  getItem("Ejercitarse", "4", <TeamOutlined />),
+  getItem("Guia Interactiva", "2", <DesktopOutlined />),
+  getItem("Información", "3", <UserOutlined />),
+  getItem("Salas", "4", <TeamOutlined />),
   getItem("Administración", "5", <FileOutlined />, [
-    getItem("Patología", "6"),
+    /* getItem("Patología", "6"),
     getItem("Recetas", "7"),
     getItem("Información", "8"),
     getItem("Ejercicio", "9"),
     getItem("Usuario", "10"),
     getItem("Paciente", "11"),
-    getItem("Categorías", "12"),
+    getItem("Categorías", "12"), */
   ]),
-  getItem("Tablas", "13", <FileOutlined />),
-  getItem("Conversor Un.Med.", "14", <FileOutlined />),
 ];
 
 // Tema personalizado para Chakra UI
@@ -114,6 +112,9 @@ export const MainApp = () => {
           style={{
             backgroundColor: "#3e4b51",
             position: "fixed",
+            opacity: selectedKey === "2" ? 0.5 : 1, // Aumentar transparencia cuando selectedKey es "2"
+            transition: "opacity 0.3s ease", // Transición suave para el cambio de transparencia
+        
             zIndex: 1,
             height: "100vh",
           }}
@@ -127,19 +128,19 @@ export const MainApp = () => {
           />
         </Sider>
         <Layout>
-          <CustomHeader setSelectedKey={setSelectedKey} />
-          <Content style={{ margin: "16px" }}>
+          {selectedKey != "2" && <CustomHeader setSelectedKey={setSelectedKey} />}
+          <Content style={{ margin: "0px" }}>
           {selectedKey === "1" && (
                 <main className="main_home">
                   <img src={`${import.meta.env.BASE_URL}fondo.jpg`} className="img_fondo" alt="" />
 
-                  <ListCard
+                  {/* <ListCard
                     setTabIndex={(index) => setSelectedKey(index.toString())}
-                  />
+                  /> */}
                 </main>
               )}
-            {selectedKey === "2" && <Inicio />}
-            {selectedKey === "3" && <ListCard />}
+            {selectedKey === "2" &&  <GuiaInteractiva />}
+            {/* {selectedKey === "3" && <ListCard />} */}
           </Content>
         </Layout>
       </Layout>

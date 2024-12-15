@@ -12,21 +12,21 @@ export const Header = ({setSelectedKey}) => {
   return (
     <>
       <div className="header">
-        <img
+        {/* <img
           className="logo_hospital"
           onClick={() => setSelectedKey("1")}
           src="/logoOñativia.png"
           alt=""
-        />
+        /> */}
         <p className="titulo">Museo Andino</p>
 
         <img src="" alt="" />
 
         <p className="txt">
-          <EnvironmentOutlined /> Paz Chaín 30 4400 Salta Salta · 03 km
+          <EnvironmentOutlined /> Dirección Museo
         </p>
         <h3 className="txt">
-          <PhoneOutlined  style={{ transform: 'rotate(90deg)' }} /> 0387 422-1605
+          <PhoneOutlined  style={{ transform: 'rotate(90deg)' }} /> Telefono Museo
         </h3>
       </div>
     </>
