@@ -4,6 +4,7 @@ import { OrbitControls, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { Html } from "@react-three/drei";
+import { transform } from "@chakra-ui/react";
 
 const Panorama = ({ textureUrl }) => {
   const texture = useTexture(textureUrl);
@@ -11,14 +12,18 @@ const Panorama = ({ textureUrl }) => {
   useEffect(() => {
     texture.encoding = THREE.sRGBEncoding;
     texture.mapping = THREE.EquirectangularReflectionMapping;
+
+    
+
   }, [texture]);
 
   return (
-    <mesh>
+    <mesh scale={[-1, 1, 1]} rotation={[0, Math.PI, 0]}>
       <sphereGeometry args={[500, 60, 40]} />
       <meshBasicMaterial map={texture} side={THREE.BackSide} />
     </mesh>
   );
+  
 };
 
 const Hotspot = ({ position, onClick, type, info }) => (
@@ -105,7 +110,6 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
   const { camera, scene } = useThree();
   const controlsRef = useRef();
   const salas = [
-    `${import.meta.env.BASE_URL}sala1_1.JPG`,
     `${import.meta.env.BASE_URL}sala1_2.JPG`,
     `${import.meta.env.BASE_URL}sala1_3.JPG`,
     `${import.meta.env.BASE_URL}sala2_1.JPG`,
@@ -128,7 +132,7 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
     const distance = startPosition.distanceTo(targetPosition);
 
     gsap.to(camera.position, {
-      duration: 3, // Aumentamos la duración para dar sensación de mayor distancia
+      duration: 1, // Aumentamos la duración para dar sensación de mayor distancia
       x: targetPosition.x,
       y: targetPosition.y,
       z: targetPosition.z,
@@ -171,7 +175,8 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
 
   return (
     <>
-      <Panorama textureUrl={salas[currentSala]} />
+      <Panorama  textureUrl={salas[currentSala]} />
+      <group scale={[-1, 1, 1]} /> {/* Inversión horizontal */}
       {hotspots.map((hotspot, index) => (
         <Hotspot
           key={index}
@@ -199,9 +204,17 @@ export const GuiaInteractiva = () => {
   const [modalInfo, setModalInfo] = useState(null);
 
   const salas = [
-    `${import.meta.env.BASE_URL}museo_360.jpg`,
-    `${import.meta.env.BASE_URL}museo_360_2.jpg`,
-    `${import.meta.env.BASE_URL}museo_360_3.png`,
+    `${import.meta.env.BASE_URL}sala1_2.JPG`,
+    `${import.meta.env.BASE_URL}sala1_3.JPG`,
+    `${import.meta.env.BASE_URL}sala2_1.JPG`,
+    `${import.meta.env.BASE_URL}sala2_2.JPG`,
+    `${import.meta.env.BASE_URL}sala2_3.JPG`,
+    `${import.meta.env.BASE_URL}sala3_1.JPG`,
+    `${import.meta.env.BASE_URL}sala3_2.JPG`,
+    `${import.meta.env.BASE_URL}sala3_3.JPG`,
+    `${import.meta.env.BASE_URL}sala4_1.JPG`,
+    `${import.meta.env.BASE_URL}sala4_2.JPG`,
+    `${import.meta.env.BASE_URL}sala4_3.JPG`,
     `${import.meta.env.BASE_URL}museo_360_4.jpg`,
   ];
 
