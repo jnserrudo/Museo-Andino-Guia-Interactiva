@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const Info = () => {
+export const Salas = () => {
   return (
     <div>
-      
+        
+        
     </div>
   )
 }

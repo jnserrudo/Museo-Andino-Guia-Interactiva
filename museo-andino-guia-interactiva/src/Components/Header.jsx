@@ -18,12 +18,12 @@ export const Header = ({setSelectedKey}) => {
           src="/logoOñativia.png"
           alt=""
         /> */}
-        <p className="titulo">Museo Andino</p>
+        <p className="titulo">MUSEO REGIONAL ANDINO</p>
 
         <img src="" alt="" />
 
         <p className="txt">
-          <EnvironmentOutlined /> Dirección Museo
+          <EnvironmentOutlined /> Av. Brígido Zabaleta, San Antonio de los Cobres, Salta
         </p>
         <h3 className="txt">
           <PhoneOutlined  style={{ transform: 'rotate(90deg)' }} /> Telefono Museo

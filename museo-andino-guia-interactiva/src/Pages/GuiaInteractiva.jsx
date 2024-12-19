@@ -3,6 +3,7 @@ import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { gsap } from "gsap";
+import { Html } from "@react-three/drei";
 
 const Panorama = ({ textureUrl }) => {
   const texture = useTexture(textureUrl);
@@ -20,10 +21,45 @@ const Panorama = ({ textureUrl }) => {
   );
 };
 
-const Hotspot = ({ position, onClick, color, info }) => (
-  <mesh position={position} onClick={() => onClick(info)}>
-    <sphereGeometry args={[2, 32, 32]} />
-    <meshBasicMaterial color={color} opacity={0.7} transparent />
+const Hotspot = ({ position, onClick, type, info }) => (
+  <mesh position={position}>
+    {type === "modal" ? (
+      <Html
+        zIndexRange={[0, 999]} // Ajusta el rango del z-index
+        style={{
+          width: "40px",
+          height: "auto",
+          display: "block",
+          borderRadius: "50%",
+          border: "2px solid white",
+        }}
+      >
+        <img
+          onClick={() => onClick(info)}
+          src={`${import.meta.env.BASE_URL}modal.png`}
+          alt="Modal Hotspot"
+          style={{ width: "32px", cursor: "pointer" }}
+        />
+      </Html>
+    ) : (
+      <Html
+        zIndexRange={[0, 999]} // Ajusta el rango del z-index
+        style={{
+          width: "40px",
+          height: "auto",
+          display: "block",
+          borderRadius: "50%",
+          border: "2px solid white",
+        }}
+      >
+        <img
+          onClick={() => onClick(info)}
+          src={`${import.meta.env.BASE_URL}avanzar.png`}
+          alt="Navigation Hotspot"
+          style={{ width: "320px", cursor: "pointer" }}
+        />
+      </Html>
+    )}
   </mesh>
 );
 
@@ -31,43 +67,56 @@ const InfoModal = ({ info, onClose }) => {
   if (!info) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'white',
-      padding: '20px',
-      borderRadius: '10px',
-      boxShadow: '0 0 10px rgba(0,0,0,0.3)',
-      zIndex: 1000,
-      maxWidth: '80%',
-      maxHeight: '80%',
-      overflow: 'auto'
-    }}>
+    <div
+      style={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+        zIndex: 1000,
+        maxWidth: "80%",
+        maxHeight: "80%",
+        overflow: "auto",
+      }}
+    >
       <h2>{info.title}</h2>
       <p>{info.description}</p>
-      {info.image && <img src={info.image} alt={info.title} style={{maxWidth: '100%'}} />}
+      {info.image && (
+        <img src={info.image} alt={info.title} style={{ maxWidth: "100%" }} />
+      )}
       {info.video && (
-        <video controls style={{maxWidth: '100%'}}>
+        <video controls style={{ maxWidth: "100%" }}>
           <source src={info.video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       )}
-      <button onClick={onClose} style={{marginTop: '10px'}}>Cerrar</button>
+      <button onClick={onClose} style={{ marginTop: "10px" }}>
+        Cerrar
+      </button>
     </div>
   );
 };
-
-
 
 const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
   const { camera, scene } = useThree();
   const controlsRef = useRef();
   const salas = [
-    `${import.meta.env.BASE_URL}museo_360.jpg`,
-    `${import.meta.env.BASE_URL}museo_360_2.jpg`,
-    `${import.meta.env.BASE_URL}museo_360_3.png`,
+    `${import.meta.env.BASE_URL}sala1_1.JPG`,
+    `${import.meta.env.BASE_URL}sala1_2.JPG`,
+    `${import.meta.env.BASE_URL}sala1_3.JPG`,
+    `${import.meta.env.BASE_URL}sala2_1.JPG`,
+    `${import.meta.env.BASE_URL}sala2_2.JPG`,
+    `${import.meta.env.BASE_URL}sala2_3.JPG`,
+    `${import.meta.env.BASE_URL}sala3_1.JPG`,
+    `${import.meta.env.BASE_URL}sala3_2.JPG`,
+    `${import.meta.env.BASE_URL}sala3_3.JPG`,
+    `${import.meta.env.BASE_URL}sala4_1.JPG`,
+    `${import.meta.env.BASE_URL}sala4_2.JPG`,
+    `${import.meta.env.BASE_URL}sala4_3.JPG`,
     `${import.meta.env.BASE_URL}museo_360_4.jpg`,
   ];
 
@@ -94,90 +143,49 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
   };
   const hotspots = [
     {
-      position: [-50, 10, -100],
-      color: "red",
+      position: [-280, 20, -200],
+      type: "navigate",
       info: {
-        title: "Objeto Rojo",
-        description: "Este es un objeto interesante de color rojo.",
-        image: `${import.meta.env.BASE_URL}imagen_roja.jpg`,
-        video: `${import.meta.env.BASE_URL}video_rojo.mp4`
-      }
+        title: "Siguiente Sala",
+      },
     },
     {
-      position: [0, -20, -150],
-      color: "green",
+      position: [290, 30, -250],
+      type: "modal",
       info: {
-        title: "Objeto Verde",
-        description: "Aquí tenemos un fascinante objeto verde.",
-        image: `${import.meta.env.BASE_URL}imagen_verde.jpg`
-      }
+        title: "Objeto Histórico",
+        description: "Descripción del objeto histórico.",
+        image: `${import.meta.env.BASE_URL}sala2_1.JPG`,
+      },
     },
     {
-      position: [70, 15, -120],
-      color: "blue",
+      position: [-50, 15, -300],
+      type: "modal",
       info: {
-        title: "Objeto Azul",
-        description: "Un misterioso objeto azul con mucha historia.",
-        video: `${import.meta.env.BASE_URL}video_azul.mp4`
-      }
-    }
-  ];
-
-  const hotspotsInfo = [
-    {
-      position: [-40, 10, -100],
-      color: "orange",
-      info: {
-        title: "Objeto Naranja",
-        description: "Este es un objeto interesante de color rojo.",
-        image: `${import.meta.env.BASE_URL}imagen_roja.jpg`,
-        video: `${import.meta.env.BASE_URL}video_rojo.mp4`
-      }
+        title: "Muestra de Arte",
+        description: "Descripción de la muestra.",
+        image: `${import.meta.env.BASE_URL}sala2_2.JPG`,
+      },
     },
-    {
-      position: [10, -20, -150],
-      color: "orange",
-      info: {
-        title: "Objeto Naranja",
-        description: "Aquí tenemos un fascinante objeto verde.",
-        image: `${import.meta.env.BASE_URL}imagen_verde.jpg`
-      }
-    },
-    {
-      position: [60, 15, -120],
-      color: "orange",
-      info: {
-        title: "Objeto Naranja",
-        description: "Un misterioso objeto azul con mucha historia.",
-        video: `${import.meta.env.BASE_URL}video_azul.mp4`
-      }
-    }
   ];
 
   return (
     <>
       <Panorama textureUrl={salas[currentSala]} />
-      {hotspotsInfo.map((hotspot, index) => (
+      {hotspots.map((hotspot, index) => (
         <Hotspot
           key={index}
           position={hotspot.position}
           onClick={(info) => {
-            setModalInfo(info);
-            animateCamera(new THREE.Vector3(...hotspot.position));
+            if (hotspot.type === "modal") {
+              console.log("modal");
+              setModalInfo(info);
+            } else {
+              console.log("animate");
+              animateCamera(new THREE.Vector3(...hotspot.position));
+            }
           }}
-          color={hotspot.color}
-          info={hotspot.info}
-        />
-      ))}
-
-{hotspots.map((hotspot, index) => (
-        <Hotspot
-          key={index}
-          position={hotspot.position}
-          onClick={() => {
-            animateCamera(new THREE.Vector3(...hotspot.position));
-          }}
-          color={hotspot.color}
+          type={hotspot.type}
           info={hotspot.info}
         />
       ))}
@@ -185,7 +193,6 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
     </>
   );
 };
-
 
 export const GuiaInteractiva = () => {
   const [currentSala, setCurrentSala] = useState(0);
@@ -238,7 +245,7 @@ export const GuiaInteractiva = () => {
       >
         Sala {currentSala + 1} de {salas.length}
       </div>
-      
+
       {/* Modal de información */}
       <InfoModal info={modalInfo} onClose={() => setModalInfo(null)} />
     </div>
