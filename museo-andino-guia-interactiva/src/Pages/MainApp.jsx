@@ -19,6 +19,7 @@ import { GuiaInteractiva } from "./GuiaInteractiva"; // Página interactiva
 import { useNavigate } from "react-router-dom"; // Hook para manejar la navegación
 import "../style.css"; // Estilos personalizados
 import { FooterMuseo } from "../Components/FooterMuseo"; // Footer del sitio
+import { Salas } from "../Components/Salas";
 
 // Desestructuración de los componentes de Layout
 const { Header, Content, Footer, Sider } = Layout;
@@ -140,7 +141,11 @@ export const MainApp = () => {
                 </main>
               )}
             {selectedKey === "2" &&  <GuiaInteractiva />}
-            {/* {selectedKey === "3" && <ListCard />} */}
+
+            {selectedKey === "3" && <Info />}
+
+            {selectedKey === "4" &&  <Salas />}
+
           </Content>
         </Layout>
       </Layout>

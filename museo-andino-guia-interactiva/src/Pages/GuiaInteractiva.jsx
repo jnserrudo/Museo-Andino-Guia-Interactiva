@@ -5,6 +5,31 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 import { Html } from "@react-three/drei";
 import { transform } from "@chakra-ui/react";
+import { InfoModal } from "../Components/InfoModal";
+
+import {
+  MenuUnfoldOutlined,
+  AppstoreOutlined,
+  ExpandOutlined,
+} from "@ant-design/icons";
+
+
+const salas = [
+  /*  `${import.meta.env.BASE_URL}prueba_360.jpeg`,
+   `${import.meta.env.BASE_URL}prueba2360.jpeg`, */
+   `${import.meta.env.BASE_URL}sala1_2.JPG`,
+   `${import.meta.env.BASE_URL}sala1_3.JPG`,
+   `${import.meta.env.BASE_URL}sala2_1.JPG`,
+   `${import.meta.env.BASE_URL}sala2_2.JPG`,
+   `${import.meta.env.BASE_URL}sala2_3.JPG`,
+   `${import.meta.env.BASE_URL}sala3_1.JPG`,
+   `${import.meta.env.BASE_URL}sala3_2.JPG`,
+   `${import.meta.env.BASE_URL}sala3_3.JPG`,
+   `${import.meta.env.BASE_URL}sala4_1.JPG`,
+   `${import.meta.env.BASE_URL}sala4_2.JPG`,
+   `${import.meta.env.BASE_URL}sala4_3.JPG`,
+   `${import.meta.env.BASE_URL}museo_360_4.jpg`,
+ ];
 
 const Panorama = ({ textureUrl }) => {
   const texture = useTexture(textureUrl);
@@ -12,9 +37,6 @@ const Panorama = ({ textureUrl }) => {
   useEffect(() => {
     texture.encoding = THREE.sRGBEncoding;
     texture.mapping = THREE.EquirectangularReflectionMapping;
-
-    
-
   }, [texture]);
 
   return (
@@ -23,7 +45,6 @@ const Panorama = ({ textureUrl }) => {
       <meshBasicMaterial map={texture} side={THREE.BackSide} />
     </mesh>
   );
-  
 };
 
 const Hotspot = ({ position, onClick, type, info }) => (
@@ -43,7 +64,8 @@ const Hotspot = ({ position, onClick, type, info }) => (
           onClick={() => onClick(info)}
           src={`${import.meta.env.BASE_URL}modal.png`}
           alt="Modal Hotspot"
-          style={{ width: "32px", cursor: "pointer" }}
+          className="pulse-effect" // Añadimos la clase para el efecto de pulso
+          style={{ width: "40px", height: "40px", cursor: "pointer" }}
         />
       </Html>
     ) : (
@@ -60,69 +82,19 @@ const Hotspot = ({ position, onClick, type, info }) => (
         <img
           onClick={() => onClick(info)}
           src={`${import.meta.env.BASE_URL}avanzar.png`}
+          className="pulse-effect" // Añadimos la clase para el efecto de pulso
           alt="Navigation Hotspot"
-          style={{ width: "320px", cursor: "pointer" }}
+          style={{ width: "40px", height: "40px", cursor: "pointer" }}
         />
       </Html>
     )}
   </mesh>
 );
 
-const InfoModal = ({ info, onClose }) => {
-  if (!info) return null;
-
-  return (
-    <div
-      style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-        zIndex: 1000,
-        maxWidth: "80%",
-        maxHeight: "80%",
-        overflow: "auto",
-      }}
-    >
-      <h2>{info.title}</h2>
-      <p>{info.description}</p>
-      {info.image && (
-        <img src={info.image} alt={info.title} style={{ maxWidth: "100%" }} />
-      )}
-      {info.video && (
-        <video controls style={{ maxWidth: "100%" }}>
-          <source src={info.video} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      )}
-      <button onClick={onClose} style={{ marginTop: "10px" }}>
-        Cerrar
-      </button>
-    </div>
-  );
-};
-
 const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
   const { camera, scene } = useThree();
   const controlsRef = useRef();
-  const salas = [
-    `${import.meta.env.BASE_URL}sala1_2.JPG`,
-    `${import.meta.env.BASE_URL}sala1_3.JPG`,
-    `${import.meta.env.BASE_URL}sala2_1.JPG`,
-    `${import.meta.env.BASE_URL}sala2_2.JPG`,
-    `${import.meta.env.BASE_URL}sala2_3.JPG`,
-    `${import.meta.env.BASE_URL}sala3_1.JPG`,
-    `${import.meta.env.BASE_URL}sala3_2.JPG`,
-    `${import.meta.env.BASE_URL}sala3_3.JPG`,
-    `${import.meta.env.BASE_URL}sala4_1.JPG`,
-    `${import.meta.env.BASE_URL}sala4_2.JPG`,
-    `${import.meta.env.BASE_URL}sala4_3.JPG`,
-    `${import.meta.env.BASE_URL}museo_360_4.jpg`,
-  ];
+  
 
   const animateCamera = (targetPosition) => {
     const startPosition = camera.position.clone();
@@ -175,12 +147,13 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
 
   return (
     <>
-      <Panorama  textureUrl={salas[currentSala]} />
+      <Panorama textureUrl={salas[currentSala]} />
       <group scale={[-1, 1, 1]} /> {/* Inversión horizontal */}
       {hotspots.map((hotspot, index) => (
         <Hotspot
           key={index}
           position={hotspot.position}
+          className="hotspot"
           onClick={(info) => {
             if (hotspot.type === "modal") {
               console.log("modal");
@@ -202,8 +175,21 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
 export const GuiaInteractiva = () => {
   const [currentSala, setCurrentSala] = useState(0);
   const [modalInfo, setModalInfo] = useState(null);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 }); // Posición del cursor
+  const [showCircle, setShowCircle] = useState(false); // Controla si se muestra el círculo azul
 
-  const salas = [
+  // Evento para seguir la posición del cursor
+  const handleMouseMove = (e) => {
+    setCursorPosition({ x: e.clientX, y: e.clientY });
+    setShowCircle(e.clientY > window.innerHeight / 2); // Muestra el círculo solo en la mitad inferior
+  };
+
+  // Agrega y elimina el listener del mouse
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+  /* const salas = [
     `${import.meta.env.BASE_URL}sala1_2.JPG`,
     `${import.meta.env.BASE_URL}sala1_3.JPG`,
     `${import.meta.env.BASE_URL}sala2_1.JPG`,
@@ -216,7 +202,7 @@ export const GuiaInteractiva = () => {
     `${import.meta.env.BASE_URL}sala4_2.JPG`,
     `${import.meta.env.BASE_URL}sala4_3.JPG`,
     `${import.meta.env.BASE_URL}museo_360_4.jpg`,
-  ];
+  ]; */
 
   const handleHotspotClick = (nextSala) => {
     setCurrentSala(nextSala);
@@ -259,7 +245,52 @@ export const GuiaInteractiva = () => {
         Sala {currentSala + 1} de {salas.length}
       </div>
 
+      {/* Logo del museo */}
+      <img
+        src={`${import.meta.env.BASE_URL}logo_museo_andino.jpg`}
+        alt="Logo Museo"
+        style={{
+          position: "absolute",
+          top: "30px",
+          left: "120px",
+          width: "150px",
+        }}
+      />
+
+      {/* Círculo azul que sigue al cursor */}
+      {showCircle && (
+        <div
+          style={{
+            position: "absolute",
+            top: cursorPosition.y - 25,
+            left: cursorPosition.x - 25,
+            width: "50px",
+            height: "50px",
+            backgroundColor: "rgba(0, 0, 255, 0.5)",
+            borderRadius: "50%",
+            pointerEvents: "none", // No interfiere con eventos del mouse
+          }}
+        />
+      )}
+
+      {/* Íconos en la parte inferior con animación de pulso */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        <MenuUnfoldOutlined className="iconos_inferiores" />
+        <AppstoreOutlined className="iconos_inferiores" />
+        <ExpandOutlined className="iconos_inferiores" />
+      </div>
+
       {/* Modal de información */}
+
       <InfoModal info={modalInfo} onClose={() => setModalInfo(null)} />
     </div>
   );
