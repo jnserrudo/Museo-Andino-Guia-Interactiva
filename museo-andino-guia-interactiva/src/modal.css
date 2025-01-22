@@ -10,18 +10,31 @@
     z-index: 1000;
     width: 70%; /* Ancho predeterminado */
     max-width: 1000px; /* Limita el tamaño en pantallas grandes */
-    height: 80vh; /* Evita desbordes verticales */
+    max-height: 90vh; /* Evita desbordes verticales */
     display: flex;
     flex-direction: column;
     overflow: auto;
+  }
+
+  .cont_modal-guia{
+    height: 80vh; /* Evita desbordes verticales */
+
   }
   
   /* Contenedor interno del modal */
   .modal {
     display: flex;
-    height: 100%;
+    height: auto;
     width: 100%;
   }
+
+
+  .modal-guia {
+    
+    height: 100%;
+/*    border: 2px red solid; 
+ */  }
+
   
   /* Imagen del modal */
   .img_modal {
@@ -41,10 +54,13 @@
     padding: 1rem;
     width: 50%; /* Para pantallas grandes */
     box-sizing: border-box; /* Asegura que el padding no desborde */
-
-    
+    overflow: auto;
   }
   
+  
+  .modal-multimedia-guia{
+    height: 90%;
+  }
   /* Icono de cerrar */
   .icono_cerrar {
     font-size: 1.5rem !important;

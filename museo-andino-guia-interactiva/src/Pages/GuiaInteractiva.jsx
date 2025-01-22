@@ -130,7 +130,12 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
       type: "modal",
       info: {
         title: "Objeto Histórico",
-        description: "Descripción del objeto histórico.",
+        description: `Descripción del objeto histórico.  
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+        `,
         image: `${import.meta.env.BASE_URL}sala2_1.JPG`,
       },
     },
@@ -139,7 +144,12 @@ const Scene = ({ currentSala, handleHotspotClick, setModalInfo }) => {
       type: "modal",
       info: {
         title: "Muestra de Arte",
-        description: "Descripción de la muestra.",
+        description: `Descripción de la muestra.  
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+          lorem ipsum lorem ipsum lorem ipsum
+        `,
         image: `${import.meta.env.BASE_URL}sala2_2.JPG`,
       },
     },

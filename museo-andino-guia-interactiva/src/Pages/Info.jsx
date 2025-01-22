@@ -50,9 +50,9 @@ export const Info = () => {
           alt=""
         />
 
-        <div className="cont_modal">
-          <div className="modal">
-            <div className="modal-multimedia">
+        <div className="cont_modal cont_modal-guia">
+          <div className="modal modal-guia">
+            <div className="modal-multimedia modal-multimedia-guia">
               {info.image && (
                 <img src={info.image} alt={info.title} className="img_modal" />
               )}
@@ -63,9 +63,9 @@ export const Info = () => {
                 </video>
               )}
             </div>
-            <div className="modal-info">
+            <div className="modal-info modal-info-guia">
               <h2>{info.title}</h2>
-              <div style={{ height: "80%", overflow: "auto" }}>
+              <div style={{ height: "80%" , overflow: "auto" }}>
                 <p>{info.description}</p>
               </div>
                 <CustomerServiceOutlined
