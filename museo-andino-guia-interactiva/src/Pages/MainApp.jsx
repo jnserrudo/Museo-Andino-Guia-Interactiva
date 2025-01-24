@@ -32,7 +32,7 @@ function getItem(label, key, icon, children) {
 // Definición del menú del sidebar
 const items = [
   getItem("Inicio", "1", <PieChartOutlined />),
-  getItem("Guia Interactiva", "2", <DesktopOutlined />),
+  getItem("Vista 360", "2", <DesktopOutlined />),
   getItem("Información", "3", <UserOutlined />),
   getItem("Salas", "4", <TeamOutlined />),
   getItem("Administración", "5", <FileOutlined />, [
